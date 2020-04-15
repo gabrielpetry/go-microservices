@@ -14,21 +14,19 @@ import (
 func main() {
 
 	l := log.New(os.Stdout, "product-api", log.LstdFlags)
-	hh := handlers.NewHello(l)
-	gh := handlers.NewGoodbay(l)
+
+	ph := handlers.NewProduct(l)
 
 	sm := http.NewServeMux()
 
-
-	sm.Handle("/", hh)
-	sm.Handle("/goodbye", gh)
+	sm.Handle("/", ph)
 
 	s := &http.Server{
-		Addr: ":9090",
-		Handler: sm,
-		IdleTimeout: 120*time.Second,
-		ReadTimeout: 1*time.Second,
-		WriteTimeout: 1*time.Second,
+		Addr:         ":9090",
+		Handler:      sm,
+		IdleTimeout:  120 * time.Second,
+		ReadTimeout:  1 * time.Second,
+		WriteTimeout: 1 * time.Second,
 	}
 
 	go func() {
@@ -39,7 +37,7 @@ func main() {
 		}
 	}()
 
-		// trap sigterm or interupt and gracefully shutdown the server
+	// trap sigterm or interupt and gracefully shutdown the server
 	c := make(chan os.Signal, 1)
 	signal.Notify(c, os.Interrupt)
 	signal.Notify(c, os.Kill)
