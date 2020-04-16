@@ -85,7 +85,7 @@ var productList = []*Product{
 		ID:          2,
 		Name:        "Esspresso",
 		Description: "Short and strong",
-		Price:       1.24,
+		Price:       2.24,
 		SKU:         "ah2421",
 		CreatedOn:   time.Now().UTC().String(),
 		UpdatedOn:   time.Now().UTC().String(),
